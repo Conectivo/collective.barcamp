@@ -5,47 +5,48 @@ from zope.component import queryUtility
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.CMFCore.utils import getToolByName
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from collective.barcamp import barcampMessageFactory as _
 
 LEVEL_VOCAB = SimpleVocabulary([
-    SimpleTerm(value=u'beginner', title=u'Beginner'),
-    SimpleTerm(value=u'intermediate', title=u'Intermediate'),
-    SimpleTerm(value=u'advanced', title=u'Advanced')
+    SimpleTerm(value=u'beginner', title=_(u"Beginner")),
+    SimpleTerm(value=u'intermediate', title=_(u"Intermediate")),
+    SimpleTerm(value=u'advanced', title=_(u"Advanced"))
 ])
 
 STYPE_VOCAB = SimpleVocabulary([
-    SimpleTerm(value=u'talk', title=u'Talk'),
-    SimpleTerm(value=u'hackfest', title=u'Hackfest'),
-    SimpleTerm(value=u'workshop', title=u'Workshop'),
-    SimpleTerm(value=u'discussion', title=u'Discussion')
+    SimpleTerm(value=u'talk', title=_(u"Talk")),
+    SimpleTerm(value=u'hackfest', title=_(u"Hackfest")),
+    SimpleTerm(value=u'workshop', title=_(u"Workshop")),
+    SimpleTerm(value=u'discussion', title=_(u"Discussion"))
 ])
 
 
 from collective.barcamp.unrestrictor import unrestrictedExec
 
 class ISessionSubmissionForm(interface.Interface):
-    title = schema.TextLine(title=u"Title")
-    description = schema.Text(title=u"Description", required=True)
-    speaker = schema.TextLine(title=u"Speaker", required=True)
+    title = schema.TextLine(title=_(u"Title"))
+    description = schema.Text(title=_(u"Description"), required=True)
+    speaker = schema.TextLine(title=_(u"Speaker"), required=True)
     subject = schema.Text(
-        title=u'Tags', 
-        description=u'Enter one tag per line, multiple words allowed.',
+        title=_(u"Tags"), 
+        description=_(u"Enter one tag per line, multiple words allowed."),
         required=False
     )
     level = schema.Choice(
-        title=u'Level',
+        title=_(u"Level"),
         vocabulary=LEVEL_VOCAB
     )
     session_type = schema.Choice(
-        title=u'Session Type',
+        title=_(u"Session Type"),
         vocabulary=STYPE_VOCAB
     )
     
 class SessionSubmissionForm(form.Form):
     fields = field.Fields(ISessionSubmissionForm)
     ignoreContext = True # don't use context to get widget data
-    label = u"Register a session"
+    label = _(u"Register a session")
 
-    @button.buttonAndHandler(u'Submit')
+    @button.buttonAndHandler(_(u"Submit"))
     def handleApply(self, action):
         data, errors = self.extractData()
         typestool = getToolByName(self.context, 'portal_types')
@@ -109,33 +110,29 @@ class SessionSubmissionForm(form.Form):
 
 SessionSubmissionView = wrap_form(SessionSubmissionForm)
 
-
 class IRegistrationForm(interface.Interface):
-    title = schema.TextLine(title=u"Full name")
+    title = schema.TextLine(title=_(u"Full name"))
     email = schema.TextLine(
-        title=u"Email address",
-        description=(u"We will not publish this." +
-                    "We collect this to send confirmed details" +
-                    " and a reminder just before the camp.")
+        title=_(u"Email address"),
+        description=_(u"We will not publish this. We collect this to send confirmed details and a reminder just before the camp.")
     )
     description = schema.Text(
-        title=u"Short Bio", 
-        description=(u"Where you're from, where you work " +
-                    "/ study, brief self-description"),
+        title=_(u"Short Bio"), 
+        description=_(u"Where you're from, where you work / study, brief self-description"),
         required=True
     )
     online_presence = schema.TextLine(
-        title=u'Online presence',
-        description=u'URL to blog / website / Google+ / Twitter / Facebook / etc',
+        title=_(u"Online presence"),
+        description=_(u"URL to blog / website / Google+ / Twitter / Facebook / etc"),
         required=False
     )
 
 class RegistrationForm(form.Form):
     fields = field.Fields(IRegistrationForm)
     ignoreContext = True # don't use context to get widget data
-    label = u"Register"
+    label = _(u"Register")
 
-    @button.buttonAndHandler(u'Register')
+    @button.buttonAndHandler(_(u"Register"))
     def handleApply(self, action):
         data, errors = self.extractData()
         typestool = getToolByName(self.context, 'portal_types')
@@ -169,7 +166,7 @@ class RegistrationForm(form.Form):
             **data
         )
         plone_utils.addPortalMessage(
-            'Thank you for your submission. You are now registered',
+            _(u"Thank you for your submission. You are now registered"),
             'info'
         )
         self.request.response.redirect(self.context.absolute_url())

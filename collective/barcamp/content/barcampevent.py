@@ -11,6 +11,7 @@ from Products.ATContentTypes.content import schemata
 
 from collective.barcamp.interfaces import IBarcampEvent
 from collective.barcamp.config import PROJECTNAME
+from collective.barcamp import barcampMessageFactory as _
 from DateTime import DateTime
 
 from Products.CMFCore.permissions import ModifyPortalContent, View
@@ -31,8 +32,8 @@ BarcampEventSchema = folder.ATFolderSchema.copy() + atapi.Schema((
         #validators = ('isTidyHtml',),
         default_output_type = 'text/html',
         widget = atapi.RichWidget(
-            description = '',
-            label = u'Body Text',
+            description = _(u""),
+            label = _(u"Body Text"),
             rows = 25,
             allow_file_upload = False
         )
@@ -45,7 +46,7 @@ BarcampEventSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                   default_method=DateTime,
                   widget = atapi.CalendarWidget(
                         description= '',
-                        label=u'Event Starts'
+                        label=_(u"Event Starts")
                         )),
 
     atapi.DateTimeField('endDate',
@@ -54,16 +55,16 @@ BarcampEventSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                   storage=atapi.AnnotationStorage(),
                   default_method=DateTime,
                   widget = atapi.CalendarWidget(
-                        description = '',
-                        label=u'Event Ends'
+                        description = _(u""),
+                        label=_(u"Event Ends")
                         )),
 
     atapi.StringField('location_url',
                 searchable=True,
                 storage=atapi.AnnotationStorage(),
                 widget = atapi.StringWidget(
-                    description = '',
-                    label = u'URL link to location (website/map)'
+                    description = _(u""),
+                    label = _(u"URL link to location (website/map)")
                 )),
 ))
 

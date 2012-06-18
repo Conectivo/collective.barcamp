@@ -1,0 +1,217 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-06-18 14:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.barcamp\n"
+
+#: ../content/barcampevent.py:36
+msgid ""
+msgstr ""
+
+#: ../profiles/default/types/BarcampEvent.xml
+msgid "A Barcamp Event"
+msgstr ""
+
+#: ../profiles/default/types/BarcampSession.xml
+msgid "A Barcamp Session"
+msgstr ""
+
+#: ../profiles/default/types/BarcampParticipant.xml
+msgid "A participant information"
+msgstr ""
+
+#: ../browser/userform.py:13
+#: ../content/barcampsession.py:37
+msgid "Advanced"
+msgstr ""
+
+#: ../profiles/default/types/BarcampEvent.xml
+msgid "BarcampEvent"
+msgstr ""
+
+#: ../profiles/default/types/BarcampParticipant.xml
+msgid "BarcampParticipant"
+msgstr ""
+
+#: ../profiles/default/types/BarcampSession.xml
+msgid "BarcampSession"
+msgstr ""
+
+#: ../browser/userform.py:11
+#: ../content/barcampsession.py:37
+msgid "Beginner"
+msgstr ""
+
+#: ../content/barcampevent.py:37
+msgid "Body Text"
+msgstr ""
+
+#: ../browser/userform.py:28
+msgid "Description"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:46
+msgid "Details/Map"
+msgstr ""
+
+#: ../browser/userform.py:20
+#: ../content/barcampsession.py:46
+msgid "Discussion"
+msgstr ""
+
+#: ../browser/userform.py:116
+msgid "Email address"
+msgstr ""
+
+#: ../browser/userform.py:32
+msgid "Enter one tag per line, multiple words allowed."
+msgstr ""
+
+#: ../content/barcampevent.py:60
+msgid "Event Ends"
+msgstr ""
+
+#: ../content/barcampevent.py:50
+msgid "Event Starts"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:50
+msgid "From"
+msgstr ""
+
+#: ../browser/userform.py:114
+msgid "Full name"
+msgstr ""
+
+#: ../browser/userform.py:18
+msgid "Hackfest"
+msgstr ""
+
+#: ../browser/userform.py:12
+#: ../content/barcampsession.py:37
+msgid "Intermediate"
+msgstr ""
+
+#: ../browser/userform.py:36
+#: ../content/barcampsession.py:35
+msgid "Level"
+msgstr ""
+
+#: ../browser/templates/barcampsession.pt:15
+msgid "Level:"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:42
+msgid "Location"
+msgstr ""
+
+#: ../content/barcampsession.py:46
+msgid "Meta"
+msgstr ""
+
+#: ../browser/userform.py:125
+msgid "Online presence"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:31
+#: ../browser/userform.py:133
+msgid "Register"
+msgstr ""
+
+#: ../browser/userform.py:47
+msgid "Register a session"
+msgstr ""
+
+#: ../content/barcampsession.py:52
+msgid "Session Ends"
+msgstr ""
+
+#: ../content/barcampsession.py:51
+msgid "Session Starts"
+msgstr ""
+
+#: ../browser/userform.py:40
+#: ../content/barcampsession.py:44
+msgid "Session Type"
+msgstr ""
+
+#: ../browser/templates/barcampsession.pt:14
+msgid "Session Type:"
+msgstr ""
+
+#: ../browser/userform.py:120
+msgid "Short Bio"
+msgstr ""
+
+#: ../browser/userform.py:29
+#: ../content/barcampsession.py:27
+msgid "Speaker"
+msgstr ""
+
+#: ../browser/templates/barcampsession.pt:13
+msgid "Speaker:"
+msgstr ""
+
+#: ../browser/userform.py:49
+msgid "Submit"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:35
+msgid "Submit a Session"
+msgstr ""
+
+#: ../browser/userform.py:31
+msgid "Tags"
+msgstr ""
+
+#: ../browser/userform.py:17
+#: ../content/barcampsession.py:46
+msgid "Talk"
+msgstr ""
+
+#: ../browser/userform.py:169
+msgid "Thank you for your submission. You are now registered"
+msgstr ""
+
+#: ../browser/userform.py:27
+msgid "Title"
+msgstr ""
+
+#: ../browser/templates/barcampevent.pt:52
+msgid "To"
+msgstr ""
+
+#: ../content/barcampevent.py:68
+msgid "URL link to location (website/map)"
+msgstr ""
+
+#: ../browser/userform.py:126
+msgid "URL to blog / website / Google+ / Twitter / Facebook / etc"
+msgstr ""
+
+#: ../browser/userform.py:117
+msgid "We will not publish this. We collect this to send confirmed details and a reminder just before the camp."
+msgstr ""
+
+#: ../browser/userform.py:121
+msgid "Where you're from, where you work / study, brief self-description"
+msgstr ""
+
+#: ../browser/userform.py:19
+#: ../content/barcampsession.py:46
+msgid "Workshop"
+msgstr ""
+

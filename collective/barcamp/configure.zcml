@@ -12,14 +12,18 @@
   <include package=".content" />
   <include package=".portlets" />
   <include file="indexers.zcml"/>
+
+  <i18n:registerTranslations directory="locales" />
   
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
       title="Barcamp Content Types"
       directory="profiles/default"
-      description=""
+      description="A Plone 4 product for publish Barcamp Content Types"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      i18n:attributes="title label_gs_default; 
+                       description help_gs_default;" 
       />
   
   <!-- -*- extra stuff goes here -*- -->

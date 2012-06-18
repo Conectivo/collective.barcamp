@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1
+---
+
+ * Added Spanish translation [macagua]
+ * Added i18n support [macagua]
+
 0.1dev (unreleased)
 -------------------
 

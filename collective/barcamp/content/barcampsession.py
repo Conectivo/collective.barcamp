@@ -13,6 +13,7 @@ from Products.ATContentTypes.content.event import ATEventSchema, ATEvent
 
 from collective.barcamp.interfaces import IBarcampSession
 from collective.barcamp.config import PROJECTNAME
+from collective.barcamp import barcampMessageFactory as _
 from DateTime import DateTime
 
 
@@ -22,30 +23,33 @@ BarcampSessionSchema = ATEventSchema.copy() + atapi.Schema((
     atapi.StringField(
         'speaker',
         storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u"Speaker"),
+        ),
     ),
     atapi.StringField(
         'level',
         storage=atapi.AnnotationStorage(),
         widget=atapi.SelectionWidget(
             format='select',
-            label=u'Level',
+            label=_(u"Level"),
         ),
-        vocabulary=['beginner', 'intermediate', 'advanced']
+        vocabulary=[_(u"Beginner"),_(u"Intermediate"), _(u"Advanced")]
     ),
     atapi.StringField(
         'session_type',
         storage=atapi.AnnotationStorage(),
         widget=atapi.SelectionWidget(
             format='select',
-            label=u'Session Type',
+            label=_(u"Session Type"),
         ),
-        vocabulary=['talk', 'hackfest', 'workshop', 'discussion']
+        vocabulary=[_(u"Talk"), _(u"Discussion"), _(u"Workshop"), _(u"Meta")]
     ),
 
 ))
 
-BarcampSessionSchema['startDate'].widget.label=u'Session Starts'
-BarcampSessionSchema['endDate'].widget.label=u'Session Ends'
+BarcampSessionSchema['startDate'].widget.label=_(u"Session Starts")
+BarcampSessionSchema['endDate'].widget.label=_(u"Session Ends")
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
 # they work well with the python bridge properties.

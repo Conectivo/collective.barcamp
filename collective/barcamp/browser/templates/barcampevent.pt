@@ -3,7 +3,8 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="collective.barcamp">
 <head>
    <metal:css fill-slot="style_slot">
       <style>
@@ -27,26 +28,28 @@
   <div metal:fill-slot="content-core">
       <div id="barcamp-sidebar">
           <div id="barcamp-register-buttons">
-          <a class="barcamp-register-button" tal:attributes="href string:${context/absolute_url}/++register">
+          <a i18n:translate="" class="barcamp-register-button" 
+             tal:attributes="href string:${context/absolute_url}/++register">
              Register
           </a>
-          <a class="barcamp-register-button" tal:attributes="href string:${context/absolute_url}/++register-session">
+          <a i18n:translate="" class="barcamp-register-button" 
+             tal:attributes="href string:${context/absolute_url}/++register-session">
              Submit a Session
           </a>
           </div>
           <div id="barcamp-locationinfo">
              <dl>
-                <dt>Location</dt>
+                <dt i18n:translate="">Location</dt>
                 <dd>
                      <tal:r replace="context/location|nothing"/> 
                      <tal:r condition="context/location_url|nothing">
-                        (<a tal:attributes="href context/location_url">
+                        (<a tal:attributes="href context/location_url" i18n:translate="">
                            Details/Map</a>)
                      </tal:r>
                 </dd>
-                <dt>From</dt>
+                <dt i18n:translate="">From</dt>
                 <dd><tal:r replace="python:context.startDate.strftime('%T %A, %B %d, %Y')"/></dd>
-                <dt>To</dt>
+                <dt i18n:translate="">To</dt>
                 <dd><tal:r replace="python:context.endDate.strftime('%T %A, %B %d, %Y')"/></dd>
              </dl>
           </div>
