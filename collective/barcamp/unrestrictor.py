@@ -4,7 +4,12 @@ from AccessControl import ClassSecurityInfo, getSecurityManager
 from AccessControl.SecurityManagement import newSecurityManager, setSecurityManager
 from AccessControl.User import nobody
 from AccessControl.User import UnrestrictedUser as BaseUnrestrictedUser
-from zope.app.component.hooks import getSite
+try:
+    # Plone < 4.3
+    from zope.app.component.hooks import getSite
+except ImportError:
+    # Plone >= 4.3
+   from zope.component.hooks import getSite  # NOQA
 
 class UnrestrictedUser(BaseUnrestrictedUser):
     """Unrestricted user that still has an id.
