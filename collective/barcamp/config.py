@@ -1,5 +1,6 @@
-"""Common configuration constants
-"""
+# -*- coding: utf-8 -*-
+
+""" Common configuration constants """
 
 PROJECTNAME = 'collective.barcamp'
 

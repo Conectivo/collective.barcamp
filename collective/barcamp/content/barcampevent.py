@@ -1,71 +1,78 @@
-"""Definition of the BarcampEvent content type
-"""
+# -*- coding: utf-8 -*-
 
-from zope.interface import implements
+""" Definition of the BarcampEvent content type """
 
-from Products.Archetypes import atapi
+from DateTime import DateTime
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
+from Products.Archetypes import atapi
+# from Products.CMFCore.permissions import ModifyPortalContent
+# from Products.CMFCore.permissions import View
 
 # -*- Message Factory Imported Here -*-
-
-from collective.barcamp.interfaces import IBarcampEvent
-from collective.barcamp.config import PROJECTNAME
 from collective.barcamp import barcampMessageFactory as _
-from DateTime import DateTime
+from collective.barcamp.config import PROJECTNAME
+from collective.barcamp.interfaces import IBarcampEvent
 
-from Products.CMFCore.permissions import ModifyPortalContent, View
+from zope.interface import implements
 
 BarcampEventSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
 
-    atapi.TextField('text',
+    atapi.TextField(
+        'text',
         required=False,
         searchable=True,
-        storage = atapi.AnnotationStorage(),
+        storage=atapi.AnnotationStorage(),
         allowable_content_types=(
             'text/plain', 'text/structured', 'text/html',
             'application/msword',
         ),
-        validators = ('isTidyHtmlWithCleanup',),
-        #validators = ('isTidyHtml',),
-        default_output_type = 'text/html',
-        widget = atapi.RichWidget(
-            description = _(u""),
-            label = _(u"Body Text"),
-            rows = 25,
-            allow_file_upload = False
+        validators=('isTidyHtmlWithCleanup',),
+        # validators=('isTidyHtml',),
+        default_output_type='text/html',
+        widget=atapi.RichWidget(
+            description=_(u''),
+            label=_(u'Body Text'),
+            rows=25,
+            allow_file_upload=False
         )
     ),
 
-    atapi.DateTimeField('startDate',
-                  required=True,
-                  searchable=False,
-                  storage=atapi.AnnotationStorage(),
-                  default_method=DateTime,
-                  widget = atapi.CalendarWidget(
-                        description= '',
-                        label=_(u"Event Starts")
-                        )),
+    atapi.DateTimeField(
+        'startDate',
+        required=True,
+        searchable=False,
+        storage=atapi.AnnotationStorage(),
+        default_method=DateTime,
+        widget=atapi.CalendarWidget(
+            description='',
+            label=_(u'Event Starts')
+        )
+    ),
 
-    atapi.DateTimeField('endDate',
-                  required=True,
-                  searchable=False,
-                  storage=atapi.AnnotationStorage(),
-                  default_method=DateTime,
-                  widget = atapi.CalendarWidget(
-                        description = _(u""),
-                        label=_(u"Event Ends")
-                        )),
+    atapi.DateTimeField(
+        'endDate',
+        required=True,
+        searchable=False,
+        storage=atapi.AnnotationStorage(),
+        default_method=DateTime,
+        widget=atapi.CalendarWidget(
+            description=_(u''),
+            label=_(u'Event Ends')
+        )
+    ),
 
-    atapi.StringField('location_url',
-                searchable=True,
-                storage=atapi.AnnotationStorage(),
-                widget = atapi.StringWidget(
-                    description = _(u""),
-                    label = _(u"URL link to location (website/map)")
-                )),
+    atapi.StringField(
+        'location_url',
+        searchable=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            description=_(u''),
+            label=_(u'URL link to location (website/map)')
+        )
+    ),
 ))
 
 # Set storage on fields copied from ATFolderSchema, making sure
@@ -89,7 +96,7 @@ class BarcampEvent(folder.ATFolder):
     """A Barcamp Event"""
     implements(IBarcampEvent)
 
-    meta_type = "BarcampEvent"
+    meta_type = 'BarcampEvent'
     schema = BarcampEventSchema
 
     title = atapi.ATFieldProperty('title')

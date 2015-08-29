@@ -4,7 +4,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.barcamp">
-    
+
   <five:registerPackage package="." initialize=".initialize" />
 
   <!-- Include the sub-packages that use their own configure.zcml files. -->
@@ -14,7 +14,7 @@
   <include file="indexers.zcml"/>
 
   <i18n:registerTranslations directory="locales" />
-  
+
   <!-- Register the installation GenericSetup extension profile -->
   <genericsetup:registerProfile
       name="default"
@@ -22,10 +22,10 @@
       directory="profiles/default"
       description="A Plone 4 product for publish Barcamp Content Types"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      i18n:attributes="title label_gs_default; 
-                       description help_gs_default;" 
+      i18n:attributes="title label_gs_default;
+                       description help_gs_default;"
       />
-  
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>

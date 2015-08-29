@@ -1,15 +1,20 @@
+# -*- coding: utf-8 -*-
+
 # http://plone.org/documentation/manual/plone-community-developer-documentation/security-1/permissions
 
-from AccessControl import ClassSecurityInfo, getSecurityManager
-from AccessControl.SecurityManagement import newSecurityManager, setSecurityManager
-from AccessControl.User import nobody
+# from AccessControl import ClassSecurityInfo
+from AccessControl import getSecurityManager
+from AccessControl.SecurityManagement import newSecurityManager
+from AccessControl.SecurityManagement import setSecurityManager
 from AccessControl.User import UnrestrictedUser as BaseUnrestrictedUser
+# from AccessControl.User import nobody
 try:
     # Plone < 4.3
     from zope.app.component.hooks import getSite
 except ImportError:
     # Plone >= 4.3
-   from zope.component.hooks import getSite  # NOQA
+    from zope.component.hooks import getSite  # NOQA
+
 
 class UnrestrictedUser(BaseUnrestrictedUser):
     """Unrestricted user that still has an id.
@@ -18,6 +23,7 @@ class UnrestrictedUser(BaseUnrestrictedUser):
         """Return the ID of the user.
         """
         return self.getUserName()
+
 
 def execute_under_special_role(portal, role, function, *args, **kwargs):
     """ Execute code under special role priviledges.
@@ -52,10 +58,10 @@ def execute_under_special_role(portal, role, function, *args, **kwargs):
             # in error_log
             # so it is important thing to store
             tmp_user = UnrestrictedUser(
-              sm.getUser().getId(),
-               '', [role],
-               ''
-           )
+                sm.getUser().getId(),
+                '', [role],
+                ''
+            )
 
             # Act as user of the portal
             tmp_user = tmp_user.__of__(portal.acl_users)
@@ -70,6 +76,7 @@ def execute_under_special_role(portal, role, function, *args, **kwargs):
     finally:
         # Restore the old security manager
         setSecurityManager(sm)
+
 
 def unrestrictedExec(function, *args, **kwargs):
     site = getSite()

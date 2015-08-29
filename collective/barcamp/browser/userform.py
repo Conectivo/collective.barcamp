@@ -1,58 +1,67 @@
-from zope import interface, schema
-from z3c.form import form, field, button
-from plone.z3cform.layout import wrap_form
-from zope.component import queryUtility
-from plone.i18n.normalizer.interfaces import IIDNormalizer
+# -*- coding: utf-8 -*-
+
 from Products.CMFCore.utils import getToolByName
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
 from collective.barcamp import barcampMessageFactory as _
+from collective.barcamp.unrestrictor import unrestrictedExec
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+from plone.z3cform.layout import wrap_form
+
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
+from zope import interface
+from zope import schema
+from zope.component import queryUtility
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 LEVEL_VOCAB = SimpleVocabulary([
-    SimpleTerm(value=u'beginner', title=_(u"Beginner")),
-    SimpleTerm(value=u'intermediate', title=_(u"Intermediate")),
-    SimpleTerm(value=u'advanced', title=_(u"Advanced"))
+    SimpleTerm(value=u'beginner', title=_(u'Beginner')),
+    SimpleTerm(value=u'intermediate', title=_(u'Intermediate')),
+    SimpleTerm(value=u'advanced', title=_(u'Advanced'))
 ])
 
 STYPE_VOCAB = SimpleVocabulary([
-    SimpleTerm(value=u'talk', title=_(u"Talk")),
-    SimpleTerm(value=u'hackfest', title=_(u"Hackfest")),
-    SimpleTerm(value=u'workshop', title=_(u"Workshop")),
-    SimpleTerm(value=u'discussion', title=_(u"Discussion"))
+    SimpleTerm(value=u'talk', title=_(u'Talk')),
+    SimpleTerm(value=u'hackfest', title=_(u'Hackfest')),
+    SimpleTerm(value=u'workshop', title=_(u'Workshop')),
+    SimpleTerm(value=u'discussion', title=_(u'Discussion'))
 ])
 
 
-from collective.barcamp.unrestrictor import unrestrictedExec
-
 class ISessionSubmissionForm(interface.Interface):
-    title = schema.TextLine(title=_(u"Title"))
-    description = schema.Text(title=_(u"Description"), required=True)
-    speaker = schema.TextLine(title=_(u"Speaker"), required=True)
+    title = schema.TextLine(title=_(u'Title'))
+    description = schema.Text(title=_(u'Description'), required=True)
+    speaker = schema.TextLine(title=_(u'Speaker'), required=True)
     subject = schema.Text(
-        title=_(u"Tags"), 
-        description=_(u"Enter one tag per line, multiple words allowed."),
+        title=_(u'Tags'),
+        description=_(u'Enter one tag per line, multiple words allowed.'),
         required=False
     )
     level = schema.Choice(
-        title=_(u"Level"),
+        title=_(u'Level'),
         vocabulary=LEVEL_VOCAB
     )
     session_type = schema.Choice(
-        title=_(u"Session Type"),
+        title=_(u'Session Type'),
         vocabulary=STYPE_VOCAB
     )
-    
+
+
 class SessionSubmissionForm(form.Form):
     fields = field.Fields(ISessionSubmissionForm)
-    ignoreContext = True # don't use context to get widget data
-    label = _(u"Register a session")
+    ignoreContext = True  # don't use context to get widget data
+    label = _(u'Register a session')
 
-    @button.buttonAndHandler(_(u"Submit"))
+    @button.buttonAndHandler(_(u'Submit'))
     def handleApply(self, action):
         data, errors = self.extractData()
         typestool = getToolByName(self.context, 'portal_types')
         wftool = getToolByName(self.context, 'portal_workflow')
         identifier = queryUtility(IIDNormalizer).normalize(data['title'])
-        if not self.context.has_key('sessions'):
+        # if not self.context.has_key('sessions'):
+        if 'sessions' not in self.context:
             unrestrictedExec(
                 typestool.constructContent,
                 type_name='Folder',
@@ -86,12 +95,12 @@ class SessionSubmissionForm(form.Form):
 
         unrestrictedExec(
             typestool.constructContent,
-            type_name="BarcampSession",
+            type_name='BarcampSession',
             container=container,
             id=identifier,
             **data
         )
-        
+
         content = container[identifier]
         schema = content.Schema()
         schema['subject'].set(content, subject)
@@ -102,7 +111,7 @@ class SessionSubmissionForm(form.Form):
         schema['endDate'].set(content, self.context.endDate)
         unrestrictedExec(
             wftool.doActionFor,
-            container[identifier], 
+            container[identifier],
             'publish'
         )
         content.reindexObject()
@@ -110,35 +119,38 @@ class SessionSubmissionForm(form.Form):
 
 SessionSubmissionView = wrap_form(SessionSubmissionForm)
 
+
 class IRegistrationForm(interface.Interface):
-    title = schema.TextLine(title=_(u"Full name"))
+    title = schema.TextLine(title=_(u'Full name'))
     email = schema.TextLine(
-        title=_(u"Email address"),
-        description=_(u"We will not publish this. We collect this to send confirmed details and a reminder just before the camp.")
+        title=_(u'Email address'),
+        description=_(u'We will not publish this. We collect this to send confirmed details and a reminder just before the camp.')
     )
     description = schema.Text(
-        title=_(u"Short Bio"), 
-        description=_(u"Where you're from, where you work / study, brief self-description"),
+        title=_(u'Short Bio'),
+        description=_(u'Where you\'re from, where you work / study, brief self-description'),
         required=True
     )
     online_presence = schema.TextLine(
-        title=_(u"Online presence"),
-        description=_(u"URL to blog / website / Google+ / Twitter / Facebook / etc"),
+        title=_(u'Online presence'),
+        description=_(u'URL to blog / website / Google+ / Twitter / Facebook / etc'),
         required=False
     )
 
+
 class RegistrationForm(form.Form):
     fields = field.Fields(IRegistrationForm)
-    ignoreContext = True # don't use context to get widget data
-    label = _(u"Register")
+    ignoreContext = True  # don't use context to get widget data
+    label = _(u'Register')
 
-    @button.buttonAndHandler(_(u"Register"))
+    @button.buttonAndHandler(_(u'Register'))
     def handleApply(self, action):
         data, errors = self.extractData()
         typestool = getToolByName(self.context, 'portal_types')
-        wftool = getToolByName(self.context, 'portal_workflow')
+        # wftool = getToolByName(self.context, 'portal_workflow')
         plone_utils = getToolByName(self.context, 'plone_utils')
-        if not self.context.has_key('registrations'):
+        # if not self.context.has_key('registrations'):
+        if 'registrations' not in self.context:
             unrestrictedExec(
                 typestool.constructContent,
                 type_name='Folder',
@@ -160,13 +172,13 @@ class RegistrationForm(form.Form):
 
         unrestrictedExec(
             typestool.constructContent,
-            type_name="BarcampParticipant",
+            type_name='BarcampParticipant',
             container=container,
             id=identifier,
             **data
         )
         plone_utils.addPortalMessage(
-            _(u"Thank you for your submission. You are now registered"),
+            _(u'Thank you for your submission. You are now registered'),
             'info'
         )
         self.request.response.redirect(self.context.absolute_url())

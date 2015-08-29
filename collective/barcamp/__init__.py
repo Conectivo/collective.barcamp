@@ -1,11 +1,11 @@
-"""Main product initializer
-"""
+# -*- coding: utf-8 -*-
 
-from zope.i18nmessageid import MessageFactory
-from collective.barcamp import config
+""" Main product initializer """
 
 from Products.Archetypes import atapi
 from Products.CMFCore import utils
+from collective.barcamp import config
+from zope.i18nmessageid import MessageFactory
 
 # Define a message factory for when this product is internationalised.
 # This will be imported with the special name "_" in most modules. Strings
@@ -43,8 +43,9 @@ def initialize(context):
     # in the GenericSetup profile.
 
     for atype, constructor in zip(content_types, constructors):
-        utils.ContentInit('%s: %s' % (config.PROJECTNAME, atype.portal_type),
+        utils.ContentInit(
+            '%s: %s' % (config.PROJECTNAME, atype.portal_type),
             content_types=(atype, ),
             permission=config.ADD_PERMISSIONS[atype.portal_type],
             extra_constructors=(constructor,),
-            ).initialize(context)
+        ).initialize(context)

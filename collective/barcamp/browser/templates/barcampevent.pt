@@ -28,11 +28,11 @@
   <div metal:fill-slot="content-core">
       <div id="barcamp-sidebar">
           <div id="barcamp-register-buttons">
-          <a i18n:translate="" class="barcamp-register-button" 
+          <a i18n:translate="" class="barcamp-register-button"
              tal:attributes="href string:${context/absolute_url}/++register">
              Register
           </a>
-          <a i18n:translate="" class="barcamp-register-button" 
+          <a i18n:translate="" class="barcamp-register-button"
              tal:attributes="href string:${context/absolute_url}/++register-session">
              Submit a Session
           </a>
@@ -41,7 +41,7 @@
              <dl>
                 <dt i18n:translate="">Location</dt>
                 <dd>
-                     <tal:r replace="context/location|nothing"/> 
+                     <tal:r replace="context/location|nothing"/>
                      <tal:r condition="context/location_url|nothing">
                         (<a tal:attributes="href context/location_url" i18n:translate="">
                            Details/Map</a>)

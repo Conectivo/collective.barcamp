@@ -71,7 +71,16 @@ setup(name='collective.barcamp',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      # extras_require=dict(tests=tests_require),
+      extras_require={
+          'test': [
+              'plone.app.robotframework',
+              'plone.app.testing [robot] >=4.2.2',
+              'plone.browserlayer',
+              'plone.testing',
+              'robotsuite',
+          ],
+      },
       test_suite='collective.barcamp.tests.test_docs.test_suite',
       entry_points="""
       # -*- entry_points -*-

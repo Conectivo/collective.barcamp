@@ -2,7 +2,7 @@
 <object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
    cookie_persistence="False" default_skin="Sunburst Theme"
    request_varname="plone_skin">
- 
+
  <object name="plone_deprecated" meta_type="Filesystem Directory View"
     directory="Products.CMFPlone:skins/plone_deprecated"/>
 

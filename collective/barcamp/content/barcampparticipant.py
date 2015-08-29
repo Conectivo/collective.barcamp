@@ -1,23 +1,23 @@
-"""Definition of the BarcampParticipant content type
-"""
+# -*- coding: utf-8 -*-
 
-from zope.interface import implements
+""" Definition of the BarcampParticipant content type """
 
-from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
+from Products.Archetypes import atapi
 
 # -*- Message Factory Imported Here -*-
-
-from collective.barcamp.interfaces import IBarcampParticipant
 from collective.barcamp.config import PROJECTNAME
+from collective.barcamp.interfaces import IBarcampParticipant
+from zope.interface import implements
 
 BarcampParticipantSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
-    atapi.StringField('email',
-                 required=True,
-                 validators=('isEmail'),
+    atapi.StringField(
+        'email',
+        required=True,
+        validators=('isEmail'),
     ),
 
     atapi.StringField('online_presence', required=False)
@@ -36,7 +36,7 @@ class BarcampParticipant(base.ATCTContent):
     """A participant information"""
     implements(IBarcampParticipant)
 
-    meta_type = "BarcampParticipant"
+    meta_type = 'BarcampParticipant'
     schema = BarcampParticipantSchema
 
     title = atapi.ATFieldProperty('title')

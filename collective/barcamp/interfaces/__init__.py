@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
+
 # -*- extra stuff goes here -*-
-from barcampparticipant import IBarcampParticipant
-from barcampsession import IBarcampSession
-from barcampevent import IBarcampEvent
+# from barcampevent import IBarcampEvent
+# from barcampparticipant import IBarcampParticipant
+# from barcampsession import IBarcampSession
